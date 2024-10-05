@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useHasMounted = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -7,4 +7,4 @@ export const useHasMounted = () => {
   }, []);
 
   return hasMounted;
-};
+}

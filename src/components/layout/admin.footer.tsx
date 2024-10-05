@@ -1,14 +1,16 @@
-'use client';
-
+'use client'
 import { Layout } from 'antd';
 
 const AdminFooter = () => {
     const { Footer } = Layout;
+
     return (
-        <Footer style={{ textAlign: 'center' }}>
-            Nest-Next ©{new Date().getFullYear()} Created by PhatNgo
-        </Footer>
-    );
-};
+        <>
+            <Footer style={{ textAlign: 'center' }}>
+                Hỏi Dân IT ©{new Date().getFullYear()} Created by @hoidanit
+            </Footer>
+        </>
+    )
+}
 
 export default AdminFooter;
