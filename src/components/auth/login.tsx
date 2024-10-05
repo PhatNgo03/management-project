@@ -2,10 +2,24 @@
 import { Button, Col, Divider, Form, Input, Row } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { authenticate } from '@/utils/actions';
 
 const Login = () => {
 
     const onFinish = async (values: any) => {
+        const { email, password } = values;
+        //trigger sign in
+
+        const res = await authenticate(email, password)
+        console.log("Check ress", res);
+        // try {
+        //     const data = await signIn("credentials", { email, password, redirect: false })
+        //     console.log(">> Check data: ", data)
+        // }catch(e)
+        // {
+        //     console.log(e);
+        // }
+
 
     };
 

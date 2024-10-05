@@ -8,4 +8,4 @@ const ManageUserPage = () => {
     )
 }
 
-export default ManageUserPage;
+export default ManageUserPage; 
