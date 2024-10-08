@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import queryString from 'query-string';
 
 export const sendRequest = async <T>(props: IRequest) => { //type

@@ -9,7 +9,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
         Credentials({
             credentials: {
-                email: {},
+                username: {},
                 password: {},
             },
             authorize: async (credentials) => {
@@ -17,12 +17,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     method: "POST",
                     url: "http://localhost:8080/api/v1/auth/login",
                     body: {
-                        username: credentials.email,
+                        username: credentials.username,
                         password: credentials.password
                     }
                 })
-                console.log(">>> Check res: ", res)
-                if (!res.statusCode) {
+                if (res.statusCode === 201) {
                     return {
                         _id: res.data?.user?._id,
                         name: res.data?.user?.name,
@@ -58,6 +57,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session({ session, token }) {
             (session.user as IUser) = token.user;
             return session
+        },
+        authorized: async ({ auth }) => {
+            return !!auth
         },
     },
 
