@@ -5,8 +5,7 @@ import { Button, Col, Divider, Form, Input, notification, Row } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { sendRequest } from '@/utils/api';
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from 'next/navigation';
 
 const Register = () => {
     const router = useRouter()
@@ -21,7 +20,7 @@ const Register = () => {
             }
         })
         if (res?.data) {
-            router.push(`/verify/${res?.data?._id}`)
+            router.push(`/verify/${res?.data?._id}`);
         } else {
             notification.error({
                 message: "Register error",

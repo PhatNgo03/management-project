@@ -5,7 +5,7 @@ import { Button, Col, Divider, Form, Input, message, notification, Row } from 'a
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { sendRequest } from '@/utils/api';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const Verify = (props: any) => {
     const { id } = props;
@@ -14,7 +14,6 @@ const Verify = (props: any) => {
 
     const onFinish = async (values: any) => {
         const { _id, code } = values;
-
         const res = await sendRequest<IBackendRes<any>>({
             url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/check-code`,
             method: "POST",
@@ -23,8 +22,8 @@ const Verify = (props: any) => {
             }
         })
         if (res?.data) {
-            message.success("Kích hoạt tài khoản thành công")
-            router.push(`/auth/login`)
+            message.success("Kích hoạt tài khoản thành công.")
+            router.push(`/auth/login`);
         } else {
             notification.error({
                 message: "Verify error",
@@ -42,7 +41,7 @@ const Verify = (props: any) => {
                     border: "1px solid #ccc",
                     borderRadius: "5px"
                 }}>
-                    <legend>Kích hoạt Tài Khoản</legend>
+                    <legend>Kích hoạt tài khoản</legend>
                     <Form
                         name="basic"
                         onFinish={onFinish}
@@ -58,21 +57,24 @@ const Verify = (props: any) => {
                             <Input disabled />
                         </Form.Item>
                         <div>
-                            Mã code đã được gửi đến email đăng kí, vui lòng kiểm tra email
+                            Mã code đã được gửi tới email đăng ký, vui lòng kiểm tra email.
                         </div>
                         <Divider />
+
                         <Form.Item
                             label="Code"
                             name="code"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your password!',
+                                    message: 'Please input your code!',
                                 },
                             ]}
                         >
-                            <Input.Password />
+                            <Input />
                         </Form.Item>
+
+
 
                         <Form.Item
                         >

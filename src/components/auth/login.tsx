@@ -1,40 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { Button, Col, Divider, Form, Input, notification, Row } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { authenticate } from '@/utils/actions';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import ModalReactive from './modal.reactive';
-import { useState } from "react";
+import { useState } from 'react';
+import ModalChangePassword from './modal.change.password';
 
 const Login = () => {
-    const router = useRouter()
+    const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userEmail, setUserEmail] = useState("");
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [changePassword, setChangePassword] = useState(false);
+
     const onFinish = async (values: any) => {
         const { username, password } = values;
         setUserEmail("");
-        //trigger sign in
-
-        const res = await authenticate(username, password)
-
+        //trigger sign-in
+        const res = await authenticate(username, password);
 
         if (res?.error) {
+            //error
             if (res?.code === 2) {
-                setIsModalOpen(true)
-                setUserEmail(username)
+                setIsModalOpen(true);
+                setUserEmail(username);
                 return;
             }
             notification.error({
-                message: "Error Login",
+                message: "Error login",
                 description: res?.error
             })
 
-        }
-        else {
-            router.push('/dashboard')
+        } else {
+            //redirect to /dashboard
+            router.push('/dashboard');
         }
     };
 
@@ -85,9 +87,16 @@ const Login = () => {
 
                             <Form.Item
                             >
-                                <Button type="primary" htmlType="submit">
-                                    Login
-                                </Button>
+                                <div style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center"
+                                }}>
+                                    <Button type="primary" htmlType="submit">
+                                        Login
+                                    </Button>
+                                    <Button type='link' onClick={() => setChangePassword(true)}>Quên mật khẩu ?</Button>
+                                </div>
                             </Form.Item>
                         </Form>
                         <Link href={"/"}><ArrowLeftOutlined /> Quay lại trang chủ</Link>
@@ -103,8 +112,11 @@ const Login = () => {
                 setIsModalOpen={setIsModalOpen}
                 userEmail={userEmail}
             />
+            <ModalChangePassword
+                isModalOpen={changePassword}
+                setIsModalOpen={setChangePassword}
+            />
         </>
-
     )
 }
 
